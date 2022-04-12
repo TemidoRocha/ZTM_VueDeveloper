@@ -19,3 +19,19 @@ it can extract the styles from the bundle
 # mini-css-extract-plugin
 
 in this case the css will be extracted from the budle and saved on a separate file with this plugin
+
+# SASS is a pre-rocessor language
+
+# postCSS is a post processor.
+
+it is a library that can modify our code after we written it
+it is an independent library and it is not mandatory to use with webpack. it is usefull to combine in order to automoate our process
+we need plugins to allow postcss workerby itself it only consumes css and spits css
+https://www.postcss.parts/
+
+# ESlint
+
+Linting is the process of reviewing your code for consistencies.
+it's essentially a code quality reviewer
+
+Tehre are several libraries. In this case it is used the eslint.org
