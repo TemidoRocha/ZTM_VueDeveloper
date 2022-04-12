@@ -1,3 +1,17 @@
+// https://sass-lang.com/documentation/modules/color
+@import 'variables';
+
 h1 {
-  color: red;
+  color: $red;
+
+  span {
+    // h1 span
+    color: $blue;
+  }
+
+  // & is the parent selector
+  &:hover {
+    // h1:hover
+    color: darken($red, 10%);
+  }
 }
