@@ -34,4 +34,6 @@ https://www.postcss.parts/
 Linting is the process of reviewing your code for consistencies.
 it's essentially a code quality reviewer
 
-Tehre are several libraries. In this case it is used the eslint.org
+There are several libraries. In this case it is used the eslint.org
+I implemented as per geting started
+$ npx eslint pizza.js postcss.config.js --fix
