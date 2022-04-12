@@ -15,3 +15,7 @@ one way to webpack know the existance of the scss is to import it inside the js 
 # style-loader
 
 it can extract the styles from the bundle
+
+# mini-css-extract-plugin
+
+in this case the css will be extracted from the budle and saved on a separate file with this plugin
