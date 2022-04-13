@@ -149,13 +149,18 @@
             </button>
           </form>
           <!-- Registration Form -->
-          <form v-show="tab === 'register'">
+          <vee-form
+            v-show="tab === 'register'"
+            :validation-schema="schema"
+            @submit="register"
+          >
             <!-- Name -->
             <div class="mb-3">
-              <label for="text" class="inline-block mb-2">
+              <label for="name" class="inline-block mb-2">
                 Name
-                <input
+                <vee-field
                   id="text"
+                  name="name"
                   type="text"
                   class="
                     block
@@ -171,14 +176,22 @@
                   "
                   placeholder="Enter Name"
                 />
+                <!--
+                    the rules can also be set at the vee-field directly
+                    :rules="{
+                    required: true,
+                  }" -->
+                <!-- the name needs to be the same as the vee-field name that we want to link -->
+                <ErrorMessage class="text-red-600" name="name" />
               </label>
             </div>
             <!-- Email -->
             <div class="mb-3">
-              <label for="email2" class="inline-block mb-2">
+              <label for="emailRegistration" class="inline-block mb-2">
                 Email
-                <input
-                  id="email2"
+                <vee-field
+                  id="emailRegistration"
+                  name="email"
                   type="email"
                   class="
                     block
@@ -194,14 +207,16 @@
                   "
                   placeholder="Enter Email"
                 />
+                <ErrorMessage class="text-red-600" name="email" />
               </label>
             </div>
             <!-- Age -->
             <div class="mb-3">
               <label for="age" class="inline-block mb-2">
                 Age
-                <input
+                <vee-field
                   id="age"
+                  name="age"
                   type="number"
                   class="
                     block
@@ -216,14 +231,16 @@
                     rounded
                   "
                 />
+                <ErrorMessage class="text-red-600" name="age" />
               </label>
             </div>
             <!-- Password -->
             <div class="mb-3">
-              <label for="password2" class="inline-block mb-2">
+              <label for="passwordRegistration" class="inline-block mb-2">
                 Password
-                <input
-                  id="password2"
+                <vee-Field
+                  id="passwordRegistration"
+                  name="password"
                   type="password"
                   class="
                     block
@@ -239,14 +256,16 @@
                   "
                   placeholder="Password"
                 />
+                <ErrorMessage class="text-red-600" name="password" />
               </label>
             </div>
             <!-- Confirm Password -->
             <div class="mb-3">
-              <label for="passwordConfirmation" class="inline-block mb-2">
+              <label for="confirm_password" class="inline-block mb-2">
                 Confirm Password
-                <input
-                  id="passwordConfirmation"
+                <vee-field
+                  id="confirm_password"
+                  name="confirm_password"
                   type="password"
                   class="
                     block
@@ -262,14 +281,17 @@
                   "
                   placeholder="Confirm Password"
                 />
+                <ErrorMessage class="text-red-600" name="confirm_password" />
               </label>
             </div>
             <!-- Country -->
             <div class="mb-3">
               <label for="country" class="inline-block mb-2">
                 Country
-                <select
+                <vee-field
+                  as="select"
                   id="country"
+                  name="country"
                   class="
                     block
                     w-full
@@ -286,18 +308,23 @@
                   <option value="USA">USA</option>
                   <option value="Mexico">Mexico</option>
                   <option value="Germany">Germany</option>
-                </select>
+                  <option value="Antarctica">Antarctica</option>
+                </vee-field>
+                <ErrorMessage class="text-red-600" name="country" />
               </label>
             </div>
             <!-- TOS -->
             <div class="mb-3 pl-6">
               <label for="acceptTerms" class="inline-block">
                 Accept terms of service
-                <input
+                <vee-field
                   if="acceptTerms"
+                  name="tos"
+                  value="1"
                   type="checkbox"
                   class="w-4 h-4 float-left -ml-6 mt-1 rounded"
                 />
+                <ErrorMessage class="text-red-600" name="tos" />
               </label>
             </div>
             <button
@@ -316,7 +343,7 @@
             >
               Submit
             </button>
-          </form>
+          </vee-form>
         </div>
       </div>
     </div>
@@ -329,7 +356,18 @@ import { mapState, mapMutations } from 'vuex';
 export default {
   name: 'AuthModal',
   data() {
-    return { tab: 'login' };
+    return {
+      tab: 'login',
+      schema: {
+        name: 'required|min:3|max:100|alphaSpaces',
+        email: 'required|email|min:3|max:100',
+        age: 'required|minValue:18|maxValue:110',
+        password: 'required|min:3|max:100',
+        confirm_password: 'confirmed:@password',
+        country: 'required|excluded:Antarctica',
+        tos: 'required',
+      },
+    };
   },
   computed: {
     // ...mapState({
@@ -342,6 +380,9 @@ export default {
   },
   methods: {
     ...mapMutations(['toggleAuthModal']),
+    register(values) {
+      console.log(values);
+    },
   },
 };
 </script>

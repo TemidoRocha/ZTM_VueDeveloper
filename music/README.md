@@ -22,3 +22,10 @@ They need to be registed before the mounting the instance.
 
 getters are better for performing a calculation on/with a state property,
 mapping teh state is better for retrieving a state property.
+
+## Validation on the client
+
+proviedes immediate feedback.
+saves resources on the server by reducing the number of requests to submit a form.
+validation should alwaus be performed on the server
+https://vee-validate.logaretm.com/v4/guide/components/validation
