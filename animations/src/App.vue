@@ -131,9 +131,14 @@ h2 {
 
 .fade-leave-active {
   transition: all 1s linear;
+  position: absolute;
 }
 .fade-leave-to {
   opacity: 0;
+}
+
+.fade-move {
+  transition: all 1s linear;
 }
 
 .zoom-enter-active {
