@@ -23,17 +23,32 @@
     use the prop :css="false" to tel vue to skip the check of what types of animations we have
 
    -->
-  <transition
+  <!-- <transition
     @before-enter="beforeEnter"
     @enter="enter"
     @after-enter="faterEnter"
     @before-leave="beforeLeave"
     @leave="leave"
     @after-leave="afterLeave"
-    :css="false"
+    :css="true"
+    name="fade"
   >
     <h2 v-if="flag">Hello</h2>
-  </transition>
+  </transition> -->
+
+  <button @click="addItem">ADD</button>
+
+  <ul>
+    <transition-group name="fade">
+      <li
+        v-for="(number, index) in numbers"
+        :key="number"
+        @click="removeItem(index)"
+      >
+        {{ number }}
+      </li>
+    </transition-group>
+  </ul>
 </template>
 
 <script>
@@ -42,23 +57,33 @@ export default {
   data() {
     return {
       flag: false,
+      numbers: [1, 2, 3, 4, 5],
     };
   },
   methods: {
+    addItem() {
+      const num = Math.floor(Math.random() * 100 + 1);
+      const index = Math.floor(Math.random() * this.numbers.length);
+      this.numbers.splice(index, 0, num);
+    },
+    removeItem(index) {
+      this.numbers.splice(index, 1);
+    },
     beforeEnter(el) {
       console.log("beforeEnter", el);
     },
-    enter(el, done) {
+    enter(el) {
+      // enter(el, done) {
       console.log("enter", el);
 
-      const animation = el.animate([{ transform: "scale3d(0,0,0)" }, {}], {
-        duration: 1000,
-      });
+      // const animation = el.animate([{ transform: "scale3d(0,0,0)" }, {}], {
+      //   duration: 1000,
+      // });
 
-      animation.onfinish = () => {
-        // done argument is a function that will define the function is dne
-        done();
-      };
+      // animation.onfinish = () => {
+      // done argument is a function that will define the function is dne
+      // done();
+      // };
     },
     faterEnter(el) {
       console.log("faterEnter", el);
@@ -66,17 +91,18 @@ export default {
     beforeLeave(el) {
       console.log("beforeLeave", el);
     },
-    leave(el, done) {
+    leave(el) {
+      // leave(el, done) {
       console.log("leave", el);
 
-      const animation = el.animate([{}, { transform: "scale3d(0,0,0)" }], {
-        duration: 1000,
-      });
+      // const animation = el.animate([{}, { transform: "scale3d(0,0,0)" }], {
+      //   duration: 1000,
+      // });
 
-      animation.onfinish = () => {
-        // done argument is a function that will define the function is dne
-        done();
-      };
+      // animation.onfinish = () => {
+      // done argument is a function that will define the function is dne
+      // done();
+      // };
     },
     afterLeave(el) {
       console.log("afterLeave", el);
@@ -86,6 +112,10 @@ export default {
 </script>
 
 <style>
+li {
+  font-size: 22px;
+  cursor: pointer;
+}
 h2 {
   width: 400px;
   padding: 20px;
