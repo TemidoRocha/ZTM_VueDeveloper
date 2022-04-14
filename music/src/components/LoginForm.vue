@@ -83,7 +83,7 @@ export default {
     return {
       loginSchema: {
         email: 'required|email|min:3|max:100',
-        password: 'required|min:6|max:100'
+        password: 'required|min:6|max:100',
       },
       /**
        * to disable and enable the login button while submitting the form
@@ -96,22 +96,28 @@ export default {
        */
       login_show_alert: false,
       login_alert_variant: 'bg-blue-500', // color for in process
-      login_alert_message: 'Please wait! We are logging you in.'
+      login_alert_message: 'Please wait! We are logging you in.',
     };
   },
   methods: {
-    login(values) {
-      console.log(process.env.FIREBASE_API_KEY);
+    async login(values) {
       this.login_show_alert = true;
       this.login_in_submission = true;
       this.login_alert_variant = 'bg-blue-500';
       this.login_alert_message = 'Please wait! We are logging you in.';
 
+      try {
+        await this.$store.dispatch('login', values);
+      } catch (error) {
+        this.login_in_submission = false;
+        this.login_alert_variant = 'bg-red-500';
+        this.login_alert_message = 'Invalid login details.';
+        return;
+      }
       this.login_alert_variant = 'bg-green-500';
       this.login_alert_message = 'Success! Your are now logged in.';
-      console.log(values);
-    }
-  }
+    },
+  },
 };
 </script>
 
