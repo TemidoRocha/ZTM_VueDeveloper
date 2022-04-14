@@ -32,3 +32,9 @@ https://vee-validate.logaretm.com/v4/guide/components/validation
 
 bails property set to false will force the validation throught all the rules
 after we set the bails property to false we have access to an array of errors, otherwise it will be allways only one error.
+
+### When are inputs validated?
+
+after the change events.
+if the v-model directive is applied to an input, when the model is changed.
+after the blur event.

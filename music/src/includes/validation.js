@@ -55,6 +55,10 @@ export default {
 
         return message;
       },
+      validateOnBlur: true,
+      validateOnChange: true,
+      validateOnInput: false, // the most agressive, it fires in every key stroke
+      validateOnModelUpdate: true, // whenever the value changes throught the v-model changes internally
     });
   },
 };
