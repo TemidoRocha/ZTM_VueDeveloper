@@ -240,7 +240,7 @@ export default {
       this.reg_alert_message = 'Please wait! Your account is being created.';
 
       try {
-        await auth().createUserWithEmailAndPassword(
+        await auth.createUserWithEmailAndPassword(
           values.email,
           values.password,
         );
