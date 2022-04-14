@@ -149,6 +149,13 @@
             </button>
           </form>
           <!-- Registration Form -->
+          <div
+            class="text-white text-center font-bold p-5 mb-4"
+            v-if="reg_show_alert"
+            :class="reg_alert_variant"
+          >
+            {{ reg_alert_message }}
+          </div>
           <vee-form
             v-show="tab === 'register'"
             :validation-schema="schema"
@@ -353,6 +360,7 @@
                 transition
                 hover:bg-purple-700
               "
+              :disabled="reg_in_submission"
             >
               Submit
             </button>
@@ -383,6 +391,10 @@ export default {
       userData: {
         country: 'USA',
       },
+      reg_in_submission: false,
+      reg_show_alert: false,
+      reg_alert_variant: 'bg-blue-500', // color for in process
+      reg_alert_message: 'Please wait! Your accoount is being created.',
     };
   },
   computed: {
@@ -397,6 +409,13 @@ export default {
   methods: {
     ...mapMutations(['toggleAuthModal']),
     register(values) {
+      this.reg_show_alert = true;
+      this.reg_in_submission = true;
+      this.reg_alert_variant = 'bg-blue-500';
+      this.reg_alert_message = 'Please wait! Your account is being created.';
+
+      this.reg_alert_variant = 'bg-green-500';
+      this.reg_alert_message = 'Success! Your account has been created.';
       console.log(values);
     },
   },

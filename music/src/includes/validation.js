@@ -39,8 +39,6 @@ export default {
     configure({
       generateMessage: (ctx) => {
         // this funciton will handle all global validators
-        console.dir(ctx);
-
         const messages = {
           required: `The field ${ctx.field} is required.`,
           min: `The field ${ctx.field} is too short.`,
