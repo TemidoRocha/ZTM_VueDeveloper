@@ -60,12 +60,16 @@ Collections include the records. The data you store in the database.
 Documents are objects in the database.
 A way to categorize data.
 
-## Flux Pattern https://facebook.github.io/flux/docs/in-depth-overview/
+## Flux Pattern
+
+https://facebook.github.io/flux/docs/in-depth-overview/
 
 Dispatch -> Action (business logic) -> Mutation -> State
 A unidirectional data flow is central to the Flux pattern, and the above diagram should be the primary mental model for the Flux programmer. The dispatcher, stores and views are independent nodes with distinct inputs and outputs. The actions are simple objects containing the new data and an identifying type property.
 
-## Token https://jwt.io/
+## Token
+
+https://jwt.io/
 
 Encoded strings for storing data.
 Digitally signed
