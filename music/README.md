@@ -38,3 +38,11 @@ after we set the bails property to false we have access to an array of errors, o
 after the change events.
 if the v-model directive is applied to an input, when the model is changed.
 after the blur event.
+
+## Understanding Authentication - Firebase
+
+Firebase is build in packages and we import the packages we need.
+
+#### firebase/app
+
+will help configuring the firebase

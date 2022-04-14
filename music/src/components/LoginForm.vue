@@ -83,7 +83,7 @@ export default {
     return {
       loginSchema: {
         email: 'required|email|min:3|max:100',
-        password: 'required|min:3|max:100',
+        password: 'required|min:6|max:100',
       },
       /**
        * to disable and enable the login button while submitting the form
@@ -101,6 +101,7 @@ export default {
   },
   methods: {
     login(values) {
+      console.log(process.env.FIREBASE_API_KEY);
       this.login_show_alert = true;
       this.login_in_submission = true;
       this.login_alert_variant = 'bg-blue-500';
