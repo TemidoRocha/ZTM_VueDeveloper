@@ -1,5 +1,9 @@
 import {
-  Form as VeeForm, Field as VeeField, defineRule, ErrorMessage, configure,
+  Form as VeeForm,
+  Field as VeeField,
+  defineRule,
+  ErrorMessage,
+  configure,
 } from 'vee-validate';
 import {
   required,
@@ -51,14 +55,20 @@ export default {
           tos: 'You must accept the Terms of Service.',
         };
 
-        const message = messages[ctx.rule.name] ? messages[ctx.rule.name] : `The field ${ctx.field} is invalid`;
+        const message = messages[ctx.rule.name]
+          ? messages[ctx.rule.name]
+          : `The field ${ctx.field} is invalid`;
 
         return message;
       },
       validateOnBlur: true,
       validateOnChange: true,
       validateOnInput: false, // the most agressive, it fires in every key stroke
-      validateOnModelUpdate: true, // whenever the value changes throught the v-model changes internally
+      /**
+       * validateOnModelUpdate
+       * whenever the value changes throught the v-model changes internally
+       */
+      validateOnModelUpdate: true,
     });
   },
 };
