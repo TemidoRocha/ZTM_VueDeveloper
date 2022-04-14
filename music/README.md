@@ -73,3 +73,7 @@ https://jwt.io/
 
 Encoded strings for storing data.
 Digitally signed
+
+## Routes
+
+Using the names in the router-link will make the links more readable and scalable. Using the names in case a link changes we don't have to modify all the links

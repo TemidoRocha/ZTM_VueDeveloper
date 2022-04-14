@@ -2,7 +2,9 @@
   <header id="header" class="bg-gray-700">
     <nav class="container mx-auto flex justify-start items-center py-5 px-4">
       <!-- App Name -->
-      <router-link class="text-white font-bold uppercase text-2xl mr-4" to="/"
+      <router-link
+        class="text-white font-bold uppercase text-2xl mr-4"
+        :to="{ name: 'home' }"
         >Music</router-link
       >
 
@@ -11,7 +13,9 @@
         <ul class="flex flex-row mt-1">
           <!-- Navigation Links -->
           <li class="text-white">
-            <router-link class="px-2" to="/about">About</router-link>
+            <router-link class="px-2" :to="{ name: 'about' }"
+              >About</router-link
+            >
           </li>
           <li v-if="!userLoggedIn" class="text-white">
             <a class="px-2" href="#" @click.prevent="toggleAuthModal"
@@ -20,7 +24,9 @@
           </li>
           <template v-else>
             <li class="text-white">
-              <router-link class="px-2" to="/manage">Manage</router-link>
+              <router-link class="px-2" :to="{ name: 'manage' }"
+                >Manage</router-link
+              >
             </li>
             <li class="text-white">
               <a class="px-2" href="#" @click.prevent="signout">Logout</a>
