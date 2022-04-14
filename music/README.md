@@ -55,7 +55,7 @@ Buckets are the physical location where your data is stored. Only if in a premiu
 
 Collections include the records. The data you store in the database.
 
-##### Documents
+#### Documents
 
 Documents are objects in the database.
 A way to categorize data.
