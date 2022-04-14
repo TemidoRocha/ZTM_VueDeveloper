@@ -2,12 +2,12 @@ module.exports = {
   purge: {
     enabled: true,
     content: [
-      './public/**/*.html', './src/**/*.vue',
-    ],
+      './public/**/*.html', './src/**/*.vue'
+    ]
   },
   theme: {
-    extend: {},
+    extend: {}
   },
   variants: {},
-  plugins: [],
+  plugins: []
 };

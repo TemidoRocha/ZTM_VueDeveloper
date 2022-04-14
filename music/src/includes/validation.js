@@ -3,7 +3,7 @@ import {
   Field as VeeField,
   defineRule,
   ErrorMessage,
-  configure,
+  configure
 } from 'vee-validate';
 import {
   required,
@@ -14,7 +14,7 @@ import {
   min_value as minValue,
   max_value as maxValue,
   confirmed,
-  not_one_of as excluded,
+  not_one_of as excluded
 } from '@vee-validate/rules';
 
 export default {
@@ -50,7 +50,7 @@ export default {
           excluded: `You are not allowed to use this value for the field ${ctx.field}.`,
           country_excluded: 'Due to restrictions, we do not accept users for this location',
           passwords_mismatch: "The passwords don't match.",
-          tos: 'You must accept the Terms of Service.',
+          tos: 'You must accept the Terms of Service.'
         };
 
         const message = messages[ctx.rule.name]
@@ -66,7 +66,7 @@ export default {
        * validateOnModelUpdate
        * whenever the value changes throught the v-model changes internally
        */
-      validateOnModelUpdate: true,
+      validateOnModelUpdate: true
     });
-  },
+  }
 };

@@ -28,10 +28,10 @@ import { mapMutations } from 'vuex';
 export default {
   name: 'AppHeader',
   methods: {
-    ...mapMutations(['toggleAuthModal']),
+    ...mapMutations(['toggleAuthModal'])
     // toggleAuthModal() {
     //   this.$store.commit('toggleAuthModal');
     // },
-  },
+  }
 };
 </script>

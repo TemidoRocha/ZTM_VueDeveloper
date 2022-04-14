@@ -83,7 +83,7 @@ export default {
     return {
       loginSchema: {
         email: 'required|email|min:3|max:100',
-        password: 'required|min:6|max:100',
+        password: 'required|min:6|max:100'
       },
       /**
        * to disable and enable the login button while submitting the form
@@ -96,7 +96,7 @@ export default {
        */
       login_show_alert: false,
       login_alert_variant: 'bg-blue-500', // color for in process
-      login_alert_message: 'Please wait! We are logging you in.',
+      login_alert_message: 'Please wait! We are logging you in.'
     };
   },
   methods: {
@@ -110,8 +110,8 @@ export default {
       this.login_alert_variant = 'bg-green-500';
       this.login_alert_message = 'Success! Your are now logged in.';
       console.log(values);
-    },
-  },
+    }
+  }
 };
 </script>
 

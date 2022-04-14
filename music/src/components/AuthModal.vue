@@ -103,7 +103,7 @@ export default {
   name: 'AuthModal',
   data() {
     return {
-      tab: 'login',
+      tab: 'login'
     };
   },
   components: { AppLoginForm, AppRegisterForm },
@@ -111,14 +111,14 @@ export default {
     // ...mapState({
     //   modal: 'authModalShow',
     // }),
-    ...mapState(['authModalShow']),
+    ...mapState(['authModalShow'])
     // authModalShow() {
     //   return this.$store.getters.authModalShow;
     // },
   },
   methods: {
-    ...mapMutations(['toggleAuthModal']),
-  },
+    ...mapMutations(['toggleAuthModal'])
+  }
 };
 </script>
 

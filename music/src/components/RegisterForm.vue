@@ -209,8 +209,6 @@
 </template>
 
 <script>
-import { auth, usersCollection } from '@/includes/firebase';
-
 export default {
   data() {
     return {
@@ -240,16 +238,7 @@ export default {
       this.reg_alert_message = 'Please wait! Your account is being created.';
 
       try {
-        await auth.createUserWithEmailAndPassword(
-          values.email,
-          values.password,
-        );
-        await usersCollection.add({
-          name: values.name,
-          email: values.email,
-          age: values.age,
-          country: values.country,
-        });
+        await this.$store.dispatch('register', values);
       } catch (error) {
         this.reg_in_submission = false;
         this.reg_alert_variant = 'bg-red-500';

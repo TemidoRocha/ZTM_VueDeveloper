@@ -59,3 +59,7 @@ Collections include the records. The data you store in the database.
 
 Documents are objects in the database.
 A way to categorize data.
+
+## Flux Pattern
+
+Dispatch -> Action (business logic) -> Mutation -> State
