@@ -10,24 +10,20 @@
         <!-- Primary Navigation -->
         <ul class="flex flex-row mt-1">
           <!-- Navigation Links -->
-          <li>
-            <router-link class="px-2 text-white" to="/about">About</router-link>
+          <li class="text-white">
+            <router-link class="px-2" to="/about">About</router-link>
           </li>
-          <li v-if="!userLoggedIn">
-            <a class="px-2 text-white" href="#" @click.prevent="toggleAuthModal"
+          <li v-if="!userLoggedIn" class="text-white">
+            <a class="px-2" href="#" @click.prevent="toggleAuthModal"
               >Login / Register</a
             >
           </li>
           <template v-else>
-            <li>
-              <router-link class="px-2 text-white" to="/manage"
-                >Manage</router-link
-              >
+            <li class="text-white">
+              <router-link class="px-2" to="/manage">Manage</router-link>
             </li>
-            <li>
-              <a class="px-2 text-white" href="#" @click.prevent="signout"
-                >Logout</a
-              >
+            <li class="text-white">
+              <a class="px-2" href="#" @click.prevent="signout">Logout</a>
             </li>
           </template>
         </ul>
