@@ -19,15 +19,20 @@ export default createStore({
   },
   actions: {
     async register({ commit }, payload) {
-      await auth.createUserWithEmailAndPassword(
+      const userCred = await auth.createUserWithEmailAndPassword(
         payload.email,
         payload.password
       );
-      await usersCollection.add({
+      // in case the id of the doc does not exist, firebase will create it
+      await usersCollection.doc(userCred.user.uid).set({
         name: payload.name,
         email: payload.email,
         age: payload.age,
         country: payload.country,
+      });
+
+      userCred.user.updateProfile({
+        displayName: payload.name
       });
 
       commit('toggleAuth');
