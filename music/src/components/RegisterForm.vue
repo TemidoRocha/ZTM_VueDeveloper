@@ -209,7 +209,7 @@
 </template>
 
 <script>
-import firebase from '@/includes/firebase';
+import { auth, usersCollection } from '@/includes/firebase';
 
 export default {
   data() {
@@ -234,23 +234,27 @@ export default {
   },
   methods: {
     async register(values) {
-      console.log(values);
       this.reg_show_alert = true;
       this.reg_in_submission = true;
       this.reg_alert_variant = 'bg-blue-500';
       this.reg_alert_message = 'Please wait! Your account is being created.';
-      let userCred = null;
 
       try {
-        userCred = await firebase
-          .auth()
-          .createUserWithEmailAndPassword(values.email, values.password);
+        await auth().createUserWithEmailAndPassword(
+          values.email,
+          values.password,
+        );
+        await usersCollection.add({
+          name: values.name,
+          email: values.email,
+          age: values.age,
+          country: values.country,
+        });
       } catch (error) {
         this.reg_in_submission = false;
         this.reg_alert_variant = 'bg-red-500';
         this.reg_alert_message = `An unexpected error occured.
         Please try again later.`;
-        console.log(userCred);
         return;
       }
 

@@ -46,3 +46,16 @@ Firebase is build in packages and we import the packages we need.
 #### firebase/app
 
 will help configuring the firebase
+
+#### Buckets
+
+Buckets are the physical location where your data is stored. Only if in a premium package.
+
+#### Collections
+
+Collections include the records. The data you store in the database.
+
+##### Documents
+
+Documents are objects in the database.
+A way to categorize data.

@@ -3,6 +3,7 @@ import firebase from 'firebase/app';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 import 'firebase/auth';
+import 'firebase/firestore';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -13,7 +14,17 @@ const firebaseConfig = {
   messagingSenderId: process.env.VUE_APP_FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.VUE_APP_FIREBASE_APP_ID,
 };
-console.log(firebaseConfig);
 
 // Initialize Firebase
-export default firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
+
+const auth = firebase.auth();
+const db = firebase.firestore();
+
+const usersCollection = db.collection('users');
+
+export {
+  auth,
+  db,
+  usersCollection,
+};
