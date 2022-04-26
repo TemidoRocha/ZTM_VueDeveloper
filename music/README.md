@@ -82,4 +82,5 @@ When changing a previous implemented route we should allways think taht the brow
 Possible solutions:
 
 1. gice a 404 saying the new route
-2. redirect route
+2. redirect route (in comparation with alias it allows the search engines to check the url changes )
+3. implement an alias (using an alias we are not redirecting)
