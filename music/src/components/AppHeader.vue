@@ -53,6 +53,10 @@ export default {
     // },
     signout() {
       this.$store.dispatch('signout');
+
+      if (this.$route.name === 'manage') {
+        this.$router.push({ name: 'home' });
+      }
     },
   },
 };

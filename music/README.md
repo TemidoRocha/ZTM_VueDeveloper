@@ -84,3 +84,8 @@ Possible solutions:
 1. gice a 404 saying the new route
 2. redirect route (in comparation with alias it allows the search engines to check the url changes )
 3. implement an alias (using an alias we are not redirecting)
+
+Navigation Guards:
+
+- There are a number of ways to hook into the route navigation process: globally, per-route, or in-component.
+- The Full Navigation Resolution Flow
