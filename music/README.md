@@ -77,3 +77,9 @@ Digitally signed
 ## Routes
 
 Using the names in the router-link will make the links more readable and scalable. Using the names in case a link changes we don't have to modify all the links
+
+When changing a previous implemented route we should allways think taht the browser saves the routes as well as the user can bookmark the page and that will lead to conflit.
+Possible solutions:
+
+1. gice a 404 saying the new route
+2. redirect route
