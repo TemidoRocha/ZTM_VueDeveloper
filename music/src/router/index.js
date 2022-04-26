@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '@/views/HomeView.vue';
 import AboutView from '@/views/AboutView.vue';
 import ManageView from '@/views/ManageView.vue';
+import store from '@/store';
 
 const routes = [
   {
@@ -18,6 +19,7 @@ const routes = [
     name: 'manage',
     // alias: '/manage',
     path: '/manage-music',
+    meta: { requireAuth: true },
     component: ManageView,
     beforeEnter: (to, from, next) => {
       console.log('Manage Route Guard');
@@ -43,8 +45,19 @@ const router = createRouter({
 // https://router.vuejs.org/guide/advanced/navigation-guards.html
 // Globa Guard
 router.beforeEach((to, from, next) => {
-  console.log('Global Guard');
-  next();
+  // if none of the paths is requireAuth we let it proceed
+  if (!to.matched.some((record) => record.meta.requireAuth)) {
+    next();
+    return;
+  }
+
+  // in this case we need to check if the user is logged in because one of the records
+  // require requireAuth
+  if (store.state.userLoggedIn) {
+    next();
+  } else {
+    next({ name: 'home' });
+  }
 });
 
 export default router;
