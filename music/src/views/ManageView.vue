@@ -255,10 +255,10 @@ import UploadMusic from '@/components/UploadMusic.vue';
 export default {
   name: 'ManageView',
   components: { UploadMusic },
-  beforeRouteLeave(to, from, next) {
-    this.$refs.upload.cancelUpload();
-    next();
-  }
+  // beforeRouteLeave(to, from, next) {
+  //   this.$refs.upload.cancelUpload();
+  //   next();
+  // }
   // beforeRouteEnter(to, from, next) {
   //   if (store.state.userLoggedIn) {
   //     next();
