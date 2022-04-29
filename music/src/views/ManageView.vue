@@ -3,7 +3,7 @@
   <section class="container mx-auto mt-6">
     <div class="md:grid md:grid-cols-3 md:gap-4">
       <div class="col-span-1">
-        <upload-music ref="upload" />
+        <upload-music ref="upload" :addSong="addSong" />
       </div>
       <div class="col-span-2">
         <div
@@ -24,6 +24,7 @@
               :updateSong="updateSong"
               :index="i"
               :removeSong="removeSong"
+              :updateUnsavedFlag="updateUnsavedFlag"
             />
           </div>
         </div>
@@ -43,6 +44,7 @@ export default {
   data() {
     return {
       songs: [],
+      unsavedFlag: false
     };
   },
   methods: {
@@ -53,19 +55,35 @@ export default {
     removeSong(i) {
       this.songs.splice(i, 1);
     },
-  },
-  async created() {
-    const snapshot = await songsCollection
-      .where('uid', '==', auth.currentUser.uid)
-      .get();
-    snapshot.forEach((document) => {
+    addSong(document) {
       const song = {
         ...document.data(),
         docId: document.id,
       };
       this.songs.push(song);
-    });
+    },
+    updateUnsavedFlag(value) {
+      this.unsavedFlag = value;
+      console.log(value);
+    }
   },
+  async created() {
+    const snapshot = await songsCollection
+      .where('uid', '==', auth.currentUser.uid)
+      .get();
+
+    snapshot.forEach(this.addSong);
+  },
+  // here we will check if editing is true and ask before navigating away
+  beforeRouteLeave(to, from, next) {
+    if (!this.unsavedFlag) {
+      next();
+    } else {
+      // eslint-disable-next-line no-alert, no-restricted-globals
+      const leave = confirm('You have unsaved changes. Are you sure you want to leave?');
+      next(leave);
+    }
+  }
   // beforeRouteLeave(to, from, next) {
   //   this.$refs.upload.cancelUpload();
   //   next();
