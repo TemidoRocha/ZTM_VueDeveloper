@@ -3,7 +3,7 @@
   <section class="container mx-auto mt-6">
     <div class="md:grid md:grid-cols-3 md:gap-4">
       <div class="col-span-1">
-        <upload-music />
+        <upload-music ref="upload" />
       </div>
       <div class="col-span-2">
         <div
@@ -255,6 +255,10 @@ import UploadMusic from '@/components/UploadMusic.vue';
 export default {
   name: 'ManageView',
   components: { UploadMusic },
+  beforeRouteLeave(to, from, next) {
+    this.$refs.upload.cancelUpload();
+    next();
+  }
   // beforeRouteEnter(to, from, next) {
   //   if (store.state.userLoggedIn) {
   //     next();
