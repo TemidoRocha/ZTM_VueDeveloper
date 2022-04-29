@@ -89,3 +89,21 @@ Navigation Guards:
 
 - There are a number of ways to hook into the route navigation process: globally, per-route, or in-component.
 - The Full Navigation Resolution Flow
+
+## Firebase
+
+### References
+
+An object that points to a location in your app.
+Allows to read/write references.
+Create new references.
+
+##### It is common practise to create a ref for a root location and then another for a specific location. even if we only have an archive.
+
+### Snapshots
+
+An obj that it is a copy of a location in your app.
+Read-only
+immutable
+
+Ref and snapshots can read the data in the app. Snapshots are read-only but are more memory efficient.
