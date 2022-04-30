@@ -53,11 +53,15 @@
             player-song-info
           "
         >
-          <span class="song-title">{{currentSong.modified_name}}</span> by
-          <span class="song-artist">(Uploaded by {{currentSong.displayName}})</span>
+          <span class="song-title">{{ currentSong.modified_name }}</span> by
+          <span class="song-artist"
+            >(Uploaded by {{ currentSong.displayName }})</span
+          >
         </div>
         <!-- Scrub Container  -->
+        <!-- eslint-disable-next-line vuejs-accessibility/click-events-have-key-events -->
         <span
+          @click.prevent="updateSeek"
           class="
             block
             w-full
@@ -122,10 +126,9 @@ export default {
     ...mapState(['seek', 'duration', 'playerProgress', 'currentSong']),
   },
   methods: {
-    ...mapActions(['toggleAudio']),
+    ...mapActions(['toggleAudio', 'updateSeek']),
   },
 };
 </script>
 
-<style>
-</style>
+<style></style>
