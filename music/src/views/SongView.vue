@@ -38,10 +38,22 @@
         <i class="fa fa-comments float-right text-green-400 text-2xl"></i>
       </div>
       <div class="p-6">
-        <form>
-
+        <div
+          class="text-white text-center font-bold p-4 mb-4"
+          v-if="comment_show_alert"
+          :class="comment_alert_variant"
+        >
+          {{ comment_alert_message }}
+        </div>
+        <vee-form
+          :validation-schema="schema"
+          @submit="addComment"
+          v-if="userLoggedIn"
+        >
           <!-- eslint-disable-next-line vuejs-accessibility/form-control-has-label -->
-          <textarea
+          <vee-field
+            as="textarea"
+            name="comment"
             class="
               block
               w-full
@@ -56,16 +68,19 @@
               mb-4
             "
             placeholder="Your comment here..."
-          ></textarea>
+          ></vee-field>
+          <ErrorMessage class="text-red-600" name="comment" />
           <button
             type="submit"
             class="py-1.5 px-3 rounded text-white bg-green-600 block"
+            :disabled="comment_in_submission"
           >
             Submit
           </button>
-        </form>
+        </vee-form>
         <!-- Sort Comments -->
         <select
+          v-model="sort"
           class="
             block
             mt-4
@@ -87,88 +102,95 @@
   </section>
   <!-- Comments -->
   <ul class="container mx-auto">
-    <li class="p-6 bg-gray-50 border border-gray-200">
+    <li
+      class="p-6 bg-gray-50 border border-gray-200"
+      v-for="comment in sortedComments"
+      :key="comment.docId"
+    >
       <!-- Comment Author -->
       <div class="mb-5">
-        <div class="font-bold">Elaine Dreyfuss</div>
-        <time>5 mins ago</time>
+        <div class="font-bold">{{ comment.name }}</div>
+        <time>{{ comment.datePosted }}</time>
       </div>
 
-      <p>
-        Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-        accusantium der doloremque laudantium.
-      </p>
-    </li>
-    <li class="p-6 bg-gray-50 border border-gray-200">
-      <!-- Comment Author -->
-      <div class="mb-5">
-        <div class="font-bold">Elaine Dreyfuss</div>
-        <time>5 mins ago</time>
-      </div>
-
-      <p>
-        Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-        accusantium der doloremque laudantium.
-      </p>
-    </li>
-    <li class="p-6 bg-gray-50 border border-gray-200">
-      <!-- Comment Author -->
-      <div class="mb-5">
-        <div class="font-bold">Elaine Dreyfuss</div>
-        <time>5 mins ago</time>
-      </div>
-
-      <p>
-        Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-        accusantium der doloremque laudantium.
-      </p>
-    </li>
-    <li class="p-6 bg-gray-50 border border-gray-200">
-      <!-- Comment Author -->
-      <div class="mb-5">
-        <div class="font-bold">Elaine Dreyfuss</div>
-        <time>5 mins ago</time>
-      </div>
-
-      <p>
-        Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-        accusantium der doloremque laudantium.
-      </p>
-    </li>
-    <li class="p-6 bg-gray-50 border border-gray-200">
-      <!-- Comment Author -->
-      <div class="mb-5">
-        <div class="font-bold">Elaine Dreyfuss</div>
-        <time>5 mins ago</time>
-      </div>
-
-      <p>
-        Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-        accusantium der doloremque laudantium.
-      </p>
-    </li>
-    <li class="p-6 bg-gray-50 border border-gray-200">
-      <!-- Comment Author -->
-      <div class="mb-5">
-        <div class="font-bold">Elaine Dreyfuss</div>
-        <time>5 mins ago</time>
-      </div>
-
-      <p>
-        Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-        accusantium der doloremque laudantium.
-      </p>
+      <p>{{ comment.content }}</p>
     </li>
   </ul>
 </template>
 
 <script>
-import { songsCollection } from '@/includes/firebase';
+import { songsCollection, auth, commentsCollection } from '@/includes/firebase';
+import { mapState } from 'vuex';
 
 export default {
   name: 'SongView',
   data() {
-    return { song: {} };
+    return {
+      song: {},
+      schema: {
+        comment: 'required|min:3',
+      },
+      comment_in_submission: false,
+      comment_show_alert: false,
+      comment_alert_variant: 'bg-blue-500',
+      comment_alert_message: 'Please wait! Your comment is being submitted',
+      comments: [],
+      sort: '1', // 1 will be latest to oldest and 2 oldest to latest
+    };
+  },
+  computed: {
+    ...mapState(['userLoggedIn']),
+    sortedComments() {
+      /**
+       * https://eslint.vuejs.org/rules/no-side-effects-in-computed-properties.html
+       * the slice is inserted just to have a new array
+       */
+      return this.comments.slice().sort((a, b) => {
+        if (this.sort === '1') {
+          return new Date(b.datePosted) - new Date(a.datePosted);
+        }
+        return new Date(a.datePosted) - new Date(b.datePosted);
+      });
+    },
+  },
+  methods: {
+    // vee validate function
+    async addComment(values, { resetForm }) {
+      this.comment_in_submission = true;
+      this.comment_show_alert = true;
+      this.comment_alert_variant = 'bg-blue-500';
+      this.comment_alert_message = 'Please wait! Your comment is being submitted';
+
+      const comment = {
+        content: values.comment,
+        datePosted: new Date().toString(),
+        sid: this.$route.params.id,
+        name: auth.currentUser.displayName,
+        uid: auth.currentUser.uid,
+      };
+
+      await commentsCollection.add(comment);
+
+      this.getComments();
+
+      this.comment_in_submission = false;
+      this.comment_alert_variant = 'bg-green-500';
+      this.comment_alert_message = 'Comment added!';
+
+      resetForm();
+    },
+    async getComments() {
+      const snapshots = await commentsCollection
+        .where('sid', '==', this.$route.params.id)
+        .get();
+      this.comments = [];
+      snapshots.forEach((document) => {
+        this.comments.push({
+          docId: document.id,
+          ...document.data(),
+        });
+      });
+    },
   },
   async created() {
     const docSnapshot = await songsCollection.doc(this.$route.params.id).get();
@@ -180,6 +202,8 @@ export default {
     }
 
     this.song = docSnapshot.data();
+
+    this.getComments();
   },
 };
 </script>
