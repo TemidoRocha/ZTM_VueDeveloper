@@ -91,9 +91,14 @@ export default {
     }
   },
   async created() {
+    let numberOfSongs = this.songs.length;
     while (document.documentElement.clientHeight === document.documentElement.scrollHeight) {
       // eslint-disable-next-line no-await-in-loop
       await this.getSongs();
+      if (numberOfSongs === this.songs.length) {
+        break;
+      }
+      numberOfSongs = this.songs.length;
     }
 
     window.addEventListener('scroll', this.handleScroll);
