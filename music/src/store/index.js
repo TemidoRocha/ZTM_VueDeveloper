@@ -1,16 +1,26 @@
 import { createStore } from 'vuex';
 import { auth, usersCollection } from '@/includes/firebase';
 import { Howl } from 'howler';
+import helper from '@/includes/helper';
 
 export default createStore({
   state: {
     authModalShow: false,
     userLoggedIn: false,
     currentSong: {},
-    sound: {}
+    sound: {},
+    seek: '00:00',
+    duration: '00:00',
+    playerProgress: '0%'
   },
   getters: {
     // authModalShow: (state) => state.authModalShow,
+    playing: (state) => {
+      if (state.sound.playing) {
+        return state.sound.playing();
+      }
+      return false;
+    }
   },
   mutations: {
     toggleAuthModal: (state) => {
@@ -20,11 +30,19 @@ export default createStore({
       state.userLoggedIn = !state.userLoggedIn;
     },
     newSong(state, payload) {
+      if (state.sound instanceof Howl) {
+        state.sound.unload();
+      }
       state.currentSong = payload;
       state.sound = new Howl({
         src: [payload.url],
         html5: true
       });
+    },
+    updatePostion(state) {
+      state.seek = helper.formatTime(state.sound.seek());
+      state.duration = helper.formatTime(state.sound.duration());
+      state.playerProgress = `${(state.sound.seek() / state.sound.duration()) * 100}%`;
     }
   },
   actions: {
@@ -63,9 +81,34 @@ export default createStore({
       await auth.signOut();
       commit('toggleAuth');
     },
-    async newSong({ state, commit }, payload) {
+    async newSong({ state, commit, dispatch }, payload) {
       commit('newSong', payload);
+
       state.sound.play();
+
+      state.sound.on('play', () => {
+        requestAnimationFrame(() => {
+          dispatch('progress');
+        });
+      });
+    },
+    async toggleAudio({ state }) {
+      if (!state.sound.playing) {
+        return;
+      }
+      if (state.sound.playing()) {
+        state.sound.pause();
+      } else {
+        state.sound.play();
+      }
+    },
+    progress({ commit, state, dispatch }) {
+      commit('updatePostion');
+      if (state.sound.playing()) {
+        requestAnimationFrame(() => {
+          dispatch('progress');
+        });
+      }
     }
   },
 });

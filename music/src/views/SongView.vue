@@ -229,5 +229,8 @@ export default {
 
     this.getComments();
   },
+  beforeUnmount() {
+
+  }
 };
 </script>
