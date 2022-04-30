@@ -49,7 +49,7 @@ export default {
   name: 'HomeView',
   components: { SongItem },
   data() {
-    return { songs: [], maxPerPage: 6, pendingRequest: false };
+    return { songs: [], maxPerPage: 3, pendingRequest: false };
   },
   methods: {
     async getSongs() {
@@ -86,14 +86,16 @@ export default {
       const bottomOfWindow = Math.round(scrollTop) + innerHeight === offsetHeight;
 
       if (bottomOfWindow) {
-        console.log('bottom of window');
         this.getSongs();
       }
     }
   },
   async created() {
-    this.getSongs();
-    console.log(window);
+    while (document.documentElement.clientHeight === document.documentElement.scrollHeight) {
+      // eslint-disable-next-line no-await-in-loop
+      await this.getSongs();
+    }
+
     window.addEventListener('scroll', this.handleScroll);
   },
   beforeUnmount() {
