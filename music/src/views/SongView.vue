@@ -21,7 +21,7 @@
         "
         @click.prevent="newSong(song)"
       >
-        <i class="fas fa-play"></i>
+        <i class="fas" :class="{ 'fa-play': !playing, 'fa-pause': playing }"></i>
       </button>
       <div class="z-50 text-left ml-8">
         <!-- Song Info -->
@@ -121,7 +121,7 @@
 
 <script>
 import { songsCollection, auth, commentsCollection } from '@/includes/firebase';
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'SongView',
@@ -141,6 +141,7 @@ export default {
   },
   computed: {
     ...mapState(['userLoggedIn']),
+    ...mapGetters(['playing']),
     sortedComments() {
       /**
        * https://eslint.vuejs.org/rules/no-side-effects-in-computed-properties.html

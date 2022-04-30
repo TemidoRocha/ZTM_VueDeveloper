@@ -9,6 +9,7 @@ export default createStore({
     userLoggedIn: false,
     currentSong: {},
     sound: {},
+    soundSrc: '',
     seek: '00:00',
     duration: '00:00',
     playerProgress: '0%'
@@ -38,6 +39,7 @@ export default createStore({
         src: [payload.url],
         html5: true
       });
+      state.soundSrc = payload.url;
     },
     updatePostion(state) {
       state.seek = helper.formatTime(state.sound.seek());
@@ -82,6 +84,12 @@ export default createStore({
       commit('toggleAuth');
     },
     async newSong({ state, commit, dispatch }, payload) {
+      // eslint-disable-next-line no-underscore-dangle
+      if (payload?.url === state.soundSrc) {
+        // eslint-disable-next-line no-underscore-dangle
+        dispatch('toggleAudio');
+        return;
+      }
       commit('newSong', payload);
 
       state.sound.play();
