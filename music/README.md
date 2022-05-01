@@ -111,4 +111,6 @@ Ref and snapshots can read the data in the app. Snapshots are read-only but are 
 Cancelling upload in the lifecycle is less code. Vue will work for us.
 Using the navigation guards we have more control over the order of teh execution.
 
-## Howler.js
+## Directives
+
+Modifiers have the advantage of selecting several at once. The disadvantage is that they only have boolean values.
