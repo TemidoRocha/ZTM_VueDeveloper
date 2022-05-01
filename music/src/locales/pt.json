@@ -2,6 +2,10 @@
   "home": {
     "listen": "Ouve grandes sons!"
   },
+  "register": {
+    "TOS": "",
+    "accept": ""
+  },
   "song": {
     "comment_count": "{count} Comments"
   }

@@ -176,17 +176,22 @@
     </div>
     <!-- TOS -->
     <div class="mb-3 pl-6">
-      <label for="acceptTerms" class="inline-block">
-        Accept terms of service
-        <vee-field
-          if="acceptTerms"
-          name="tos"
-          value="1"
-          type="checkbox"
-          class="w-4 h-4 float-left -ml-6 mt-1 rounded"
-        />
-        <ErrorMessage class="text-red-600" name="tos" />
-      </label>
+      <i18n-t
+        for="acceptTerms"
+        class="inline-block"
+        keypath="register.accept"
+        tag="label"
+      >
+        <a href="#">{{ $t('register.TOS') }}</a>
+      </i18n-t>
+      <vee-field
+        if="acceptTerms"
+        name="tos"
+        value="1"
+        type="checkbox"
+        class="w-4 h-4 float-left -ml-6 mt-1 rounded"
+      />
+      <ErrorMessage class="text-red-600" name="tos" />
     </div>
     <button
       type="submit"
