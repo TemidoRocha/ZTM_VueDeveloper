@@ -114,3 +114,9 @@ Using the navigation guards we have more control over the order of teh execution
 ## Directives
 
 Modifiers have the advantage of selecting several at once. The disadvantage is that they only have boolean values.
+
+## PWA vs SPA
+
+Progressive web app is a term used to describe a set of features and API's in the browser
+Puerly additive
+PWA features can be implemented on non-spa sites
