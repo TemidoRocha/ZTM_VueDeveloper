@@ -1,5 +1,8 @@
 {
   "home": {
-    "listen": "Listen to Great Music!"
+    "listen": "Listen to great music!"
+  },
+  "song": {
+    "comment_count": "No comment | 1 Comment | {count} Comments"
   }
 }

@@ -1,5 +1,8 @@
 {
   "home": {
     "listen": "Ouve grandes sons!"
+  },
+  "song": {
+    "comment_count": "{count} Comments"
   }
 }
