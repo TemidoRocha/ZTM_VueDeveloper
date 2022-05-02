@@ -1,27 +1,28 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import HomeView from '@/views/HomeView.vue';
-import AboutView from '@/views/AboutView.vue';
-import ManageView from '@/views/ManageView.vue';
-import SongView from '@/views/SongView.vue';
 import store from '@/store';
+
+const Home = () => import('@/views/HomeView.vue');
+const Manage = () => import(/** webpackChunkName: "groupedChunk" */'@/views/ManageView.vue');
+const Song = () => import(/** webpackChunkName: "groupedChunk" */'@/views/SongView.vue');
+const About = () => import('@/views/AboutView.vue');
 
 const routes = [
   {
     name: 'home',
     path: '/',
-    component: HomeView
+    component: Home
   },
   {
     name: 'about',
     path: '/about',
-    component: AboutView
+    component: About
   },
   {
     name: 'manage',
     // alias: '/manage',
     path: '/manage-music',
     meta: { requireAuth: true },
-    component: ManageView,
+    component: Manage,
     beforeEnter: (to, from, next) => {
       console.log('Manage Route Guard');
       next();
@@ -34,7 +35,7 @@ const routes = [
   {
     name: 'song',
     path: '/song/:id',
-    component: SongView
+    component: Song
   },
   {
     path: '/:catchAll(.*)*', // account for all paths that doesnt exist
