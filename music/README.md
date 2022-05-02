@@ -156,3 +156,7 @@ We need to consider teh following:
 3. import each component filespre the file
 4. Pre the filename to be a valid component naem
 5. register the component
+
+## Vuex automatic module registration
+
+## Vuex dynamic module registration
