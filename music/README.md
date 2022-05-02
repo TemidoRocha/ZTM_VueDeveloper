@@ -159,4 +159,4 @@ We need to consider teh following:
 
 ## Vuex automatic module registration
 
-## Vuex dynamic module registration
+##### https://github.com/TemidoRocha/ZTM_VueDeveloper/commit/ca030e4148ad7493853637ff1ee2baf599d6dcf2
