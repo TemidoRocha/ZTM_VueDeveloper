@@ -147,7 +147,9 @@ We need to consider teh following:
 - storage is Limited
 - unable to upload files
 
-## Registering components globally https://github.com/TemidoRocha/ZTM_VueDeveloper/commit/4066a92c1f773e4215aaf49eb476fe8921981680
+## Registering components globally
+
+#### https://github.com/TemidoRocha/ZTM_VueDeveloper/commit/4066a92c1f773e4215aaf49eb476fe8921981680
 
 1. search for component files
 2. loop through the result
