@@ -146,3 +146,11 @@ We need to consider teh following:
 - unable to authenticate
 - storage is Limited
 - unable to upload files
+
+## Registering components globally
+
+1. search for component files
+2. loop through the result
+3. import each component filespre the file
+4. Pre the filename to be a valid component naem
+5. register the component
