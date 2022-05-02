@@ -164,3 +164,23 @@ We need to consider teh following:
 ## Vuex automatic module registration
 
 ##### https://github.com/TemidoRocha/ZTM_VueDeveloper/commit/ca030e4148ad7493853637ff1ee2baf599d6dcf2
+
+## Testing
+
+The goal to test an app is to make development faster.
+One possible rule: If it doesn't save you time, then don't bother writing a test.
+We should test the output of a component.
+Input -> Component -> Output (what we should test)
+The idea is to write a test from the perspective of a developer, that is using a
+component but he doesn't know how the component funcitonality is implemented.
+
+Jest flow
+Jest -> general.js , component.vue -> babel-jest , vue-jest -> Jest
+
+Transformers are functions (babel-jest, vue-jest) that take care of compiling code
+from files that Jest will be able to understand.
+
+Stubs are fake or dummy components
+
+When we are decidingif we should import a library, we should allways think if it is
+required for the test. If we need the feature we should import, if it can be mocked, it should b mocked.
