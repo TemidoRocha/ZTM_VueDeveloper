@@ -59,7 +59,7 @@ router.beforeEach((to, from, next) => {
 
   // in this case we need to check if the user is logged in because one of the records
   // require requireAuth
-  if (store.state.userLoggedIn) {
+  if (store.state.auth.userLoggedIn) {
     next();
   } else {
     next({ name: 'home' });

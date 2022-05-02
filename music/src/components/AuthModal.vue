@@ -103,22 +103,18 @@ export default {
   name: 'AuthModal',
   data() {
     return {
-      tab: 'login'
+      tab: 'login',
     };
   },
   components: { AppLoginForm, AppRegisterForm },
   computed: {
-    // ...mapState({
-    //   modal: 'authModalShow',
-    // }),
-    ...mapState(['authModalShow'])
-    // authModalShow() {
-    //   return this.$store.getters.authModalShow;
-    // },
+    ...mapState({
+      authModalShow: (state) => state.auth.authModalShow
+    }),
   },
   methods: {
-    ...mapMutations(['toggleAuthModal'])
-  }
+    ...mapMutations(['toggleAuthModal']),
+  },
 };
 </script>
 
