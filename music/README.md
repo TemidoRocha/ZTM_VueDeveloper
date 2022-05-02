@@ -120,3 +120,29 @@ Modifiers have the advantage of selecting several at once. The disadvantage is t
 Progressive web app is a term used to describe a set of features and API's in the browser
 Puerly additive
 PWA features can be implemented on non-spa sites
+
+#### Manifest File - https://cli.vuejs.org/core-plugins/pwa.html#configuration
+
+The manifest file is only generated after production. This was set by the plugin authors
+
+#### Service Workers
+
+JS file that runs in the backgroud. (Separate Thread)
+Primarily used for caching files, pushing notifications, and backgroud syncing
+Unable to access teh DOM
+Limited browser support ( relatively new feature)
+
+##### Different strategies for cashing
+
+Cashe, then network: the app will try to search for the files in the cache first and only after at the network.
+Network, then cache: the app will search allways the files at the network and only offline will search at the cache.
+
+Workbox ( library developed by google to implement the cache) https://developers.google.com/web/tools/workbox
+It only caches the static files by default
+
+To enable the firebase cache we need to implement the db.enablePersistence() on the firebase file.
+We need to consider teh following:
+
+- unable to authenticate
+- storage is Limited
+- unable to upload files

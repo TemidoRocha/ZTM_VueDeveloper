@@ -91,6 +91,18 @@ export default {
           return;
         }
 
+        if (!navigator.onLine) {
+          this.uploads.push({
+            task: {},
+            current_progress: 100,
+            name: file.name,
+            variant: 'bg-red-400',
+            icon: 'fas fa-times',
+            text_class: 'text_red-400'
+          });
+          return;
+        }
+
         const storageRef = storage.ref('songs');
         // it is good practice to create a root referenc and then one more for the file.
         const songsRef = storageRef.child(`songs/${file.name}`); // this one will create a reference to the parent reference
