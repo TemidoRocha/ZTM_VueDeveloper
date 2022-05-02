@@ -1,32 +1,32 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import store from '@/store';
 
-const Home = () => import('@/views/HomeView.vue');
-const Manage = () => import(/** webpackChunkName: "groupedChunk" */'@/views/ManageView.vue');
-const Song = () => import(/** webpackChunkName: "groupedChunk" */'@/views/SongView.vue');
-const About = () => import('@/views/AboutView.vue');
+const HomeView = () => import(/* webpackChunkName: "group-chunk" */ '@/views/HomeView.vue');
+const ManageView = () => import('@/views/ManageView.vue');
+const SongView = () => import(/* webpackChunkName: "group-chunk" */ '@/views/SongView.vue');
+const AboutView = () => import('@/views/AboutView.vue');
 
 const routes = [
   {
     name: 'home',
     path: '/',
-    component: Home
+    component: HomeView
   },
   {
     name: 'about',
     path: '/about',
-    component: About
+    component: AboutView
   },
   {
     name: 'manage',
     // alias: '/manage',
     path: '/manage-music',
     meta: { requireAuth: true },
-    component: Manage,
-    beforeEnter: (to, from, next) => {
-      console.log('Manage Route Guard');
-      next();
-    }
+    component: ManageView,
+    // beforeEnter: (to, from, next) => {
+    //   console.log('Manage Route Guard');
+    //   next();
+    // }
   },
   {
     path: '/manage',
@@ -35,7 +35,7 @@ const routes = [
   {
     name: 'song',
     path: '/song/:id',
-    component: Song
+    component: SongView
   },
   {
     path: '/:catchAll(.*)*', // account for all paths that doesnt exist
