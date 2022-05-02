@@ -1,6 +1,5 @@
 <template>
   <main>
-    <base-button-generic />
     <!-- Introduction -->
     <section class="mb-8 py-20 text-white text-center relative">
       <div
