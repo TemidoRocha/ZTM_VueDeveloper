@@ -231,22 +231,29 @@ export default {
       });
     },
   },
-  async created() {
-    const docSnapshot = await songsCollection.doc(this.$route.params.id).get();
+  // for perceived performance we change the created to beforeRouteEnter
+  async beforeRouteEnter(to, from, next) {
+    const docSnapshot = await songsCollection.doc(to.params.id).get();
 
-    // check if teh doc exist
-    if (!docSnapshot.exists) {
-      this.$router.push({ name: 'home' });
-      return;
-    }
+    // the next funciton as a param where we can pass a callback function
+    next((vm) => {
+      // check if teh doc exist
+      if (!docSnapshot.exists) {
+        vm.$router.push({ name: 'home' });
+        return;
+      }
 
-    const { sort } = this.$route.query;
+      const { sort } = vm.$route.query;
 
-    this.sort = sort === '1' || sort === '2' ? sort : '1';
+      // eslint-disable-next-line no-param-reassign
+      vm.sort = sort === '1' || sort === '2' ? sort : '1';
 
-    this.song = docSnapshot.data();
+      // eslint-disable-next-line no-param-reassign
+      vm.song = docSnapshot.data();
 
-    this.getComments();
+      // eslint-disable-next-line no-param-reassign
+      vm.getComments();
+    });
   },
   beforeUnmount() {},
 };
