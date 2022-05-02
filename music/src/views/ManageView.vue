@@ -64,7 +64,6 @@ export default {
     },
     updateUnsavedFlag(value) {
       this.unsavedFlag = value;
-      console.log(value);
     }
   },
   async created() {
