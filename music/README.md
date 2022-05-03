@@ -194,3 +194,7 @@ Verifies that a certain number of assertions are called during a test.
 This is often useful when testing asynchronous code, in order to make
 sure that assertions in a callback actually got called.
 It is also useful to verify if the tests are leaking.
+
+Snapshot testing is when two images of an app are compared.
+Images are unreliable because different brwosers and sizes can cause a test to fail. Even if it's off by one pixel.
+Jest will serialize a value. A serializable value is basically any JS vlue that can be converted to a string.
