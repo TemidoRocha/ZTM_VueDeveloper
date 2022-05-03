@@ -182,9 +182,15 @@ from files that Jest will be able to understand.
 
 Stubs are fake or dummy components
 
-When we are decidingif we should import a library, we should allways think if it is
+When we are deciding if we should import a library, we should allways think if it is
 required for the test. If we need the feature we should import, if it can be mocked, it should b mocked.
 It is recommended that each test has an instance of teh component. Otherwise it may be difficult to refactor
 in case, for example, one of the tests makes a modification on the component.
 
 Attributes function will retrieve the attributes on the root element and not from the children components.
+
+expect.assertions(num);
+Verifies that a certain number of assertions are called during a test.
+This is often useful when testing asynchronous code, in order to make
+sure that assertions in a callback actually got called.
+It is also useful to verify if the tests are leaking.
