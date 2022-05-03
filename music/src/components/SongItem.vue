@@ -11,6 +11,8 @@
       duration-300
       hover:bg-gray-50
     "
+    :id="`song-id-${song.docId}`"
+    :class="`song-class-id-${song.docId}`"
   >
     <div>
       <router-link
