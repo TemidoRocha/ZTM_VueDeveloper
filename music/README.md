@@ -169,12 +169,14 @@ We need to consider teh following:
 
 The goal to test an app is to make development faster.
 One possible rule: If it doesn't save you time, then don't bother writing a test.
+
+#### Unit Testing with Jest flow
+
 We should test the output of a component.
 Input -> Component -> Output (what we should test)
 The idea is to write a test from the perspective of a developer, that is using a
 component but he doesn't know how the component funcitonality is implemented.
 
-Jest flow
 Jest -> general.js , component.vue -> babel-jest , vue-jest -> Jest
 
 Transformers are functions (babel-jest, vue-jest) that take care of compiling code
@@ -198,3 +200,28 @@ It is also useful to verify if the tests are leaking.
 Snapshot testing is when two images of an app are compared.
 Images are unreliable because different brwosers and sizes can cause a test to fail. Even if it's off by one pixel.
 Jest will serialize a value. A serializable value is basically any JS vlue that can be converted to a string.
+
+#### E2E with Cypress
+
+End-to-end testing is a way to check if an app is behaving correctly by automaing a browser to mimic user behaviour.
+Creating a program that can click links, fill out forms, scroll around, etc.
+
+- This tests have the following problems:
+
+1. slow
+2. unreliable
+3. difficult to debug
+
+Extremely usefull for seeing the app fully functional without having to manually test everything.
+They allow you to see if everything is working together unlike unit and snapshot testing.
+
+What should we be testing:
+We should have the minimum E2E tests.
+Major user actions (authentication)
+
+Cypress Config function:
+fixturesFolder -> are files taht hold data that can be used in different tests
+integrationFolder -> tests files for cypress
+screenshotsFolder -> cypress allow to save screenshots
+videosFolder -> cypress allow to save videos
+supportFile -> this files will load before the cypress runs. Run commands that can be performed in any tests like logging in
